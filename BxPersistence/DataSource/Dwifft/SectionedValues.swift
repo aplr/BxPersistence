@@ -70,7 +70,6 @@ public struct SectionedValues<Section: Equatable, Value: Equatable>: Equatable {
     }
 }
 
-// MARK: - Custom grouping
 public extension SectionedValues where Section: Hashable {
 
     /// This is a convenience initializer of sorts for `SectionedValues`. It acknowledges
