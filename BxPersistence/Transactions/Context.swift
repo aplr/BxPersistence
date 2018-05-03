@@ -44,17 +44,17 @@ public struct Context {
                 }
             }
             return Disposables.create()
-        }.trigger()
+            }.trigger()
     }
     
     @discardableResult
     public func rollback() -> Completable {
-        return Completable.createHot { complete in
+        return Completable.complete { complete in
             self.context {
                 self.transactions.forEach {
                     $0.rollback()
                 }
             }
-        }
+            }.trigger()
     }
 }
