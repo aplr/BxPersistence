@@ -15,7 +15,7 @@
 import Foundation
 import RxSwift
 
-public protocol DatabaseConnection {
+public protocol DatabaseConnection: class {
     
     var context: Context { get }
     
