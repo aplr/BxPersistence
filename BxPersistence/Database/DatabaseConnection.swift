@@ -15,28 +15,36 @@
 import Foundation
 import RxSwift
 
-public protocol DatabaseConnection {
+public protocol DatabaseConnection: class {
     
     var context: Context { get }
     
     func read<E: Entity>(_ type: E.Type) -> Query<E>
     
-    func create<E: Entity>(_ type: E.Type, _ execute: (Writable<E>) -> Void) -> DatabaseConnection
-    func update<E: Entity>(_ entity: E, _ execute: (Writable<E>) -> Void) -> DatabaseConnection
+    @discardableResult
+    func create<E: Entity>(_ type: E.Type, _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection
+    @discardableResult
+    func update<E: Entity>(_ entity: E, _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection
     
+    @discardableResult
     func delete<E: Entity>(_ entity: E) -> DatabaseConnection
 }
 
 extension DatabaseConnection {
     
-    public func createOrUpdate<E: PrimaryKeyEntity>(_ type: E.Type, with primaryKey: E.Key,
-                                                    _ execute: (Writable<E>) -> Void) -> DatabaseConnection {
+    @discardableResult
+    public func createOrUpdate<E: PrimaryKeyEntity & NSObject>(_ type: E.Type, with primaryKey: E.Key,
+                                                               _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection {
         if let object = self.read(type).filter(isIncluded: { $0.primaryKey == primaryKey }).first {
             return self.update(object, execute)
         }
-        return self.create(type, execute)
+        return self.create(type) { type in
+            type.entity.setValue(primaryKey, forKey: E.primaryKey)
+            execute(type)
+        }
     }
     
+    @discardableResult
     public func delete<S: Sequence>(_ entities: S) -> DatabaseConnection where S.Element: Entity {
         return entities.reduce(self) { $0.delete($1) }
     }

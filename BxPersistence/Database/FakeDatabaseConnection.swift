@@ -15,7 +15,11 @@
 import Foundation
 import RxSwift
 
-public struct FakeDatabaseConnection: DatabaseConnection {
+public class FakeDatabaseConnection: DatabaseConnection {
+    
+    public init() {
+        
+    }
     
     public var context: Context {
         return Context(transactions: [], context: { _ in return })
@@ -25,11 +29,13 @@ public struct FakeDatabaseConnection: DatabaseConnection {
         return Query(FakeQueryType())
     }
     
-    public func create<E>(_ type: E.Type, _ execute: (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
+    public func create<E>(_ type: E.Type,
+                          _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
         return self
     }
     
-    public func update<E>(_ entity: E, _ execute: (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
+    public func update<E>(_ entity: E,
+                          _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
         return self
     }
     

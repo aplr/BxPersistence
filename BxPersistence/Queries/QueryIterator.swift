@@ -16,14 +16,14 @@ import Foundation
 
 public struct QueryIterator<E: Entity>: IteratorProtocol {
     
-    private var generator: NSFastEnumerationIterator
+    private var iterator: AnyIterator<Entity>
     
-    internal init(_ base: NSFastEnumeration) {
-        generator = .init(base)
+    internal init(_ base: AnyIterator<Entity>) {
+        iterator = base
     }
     
     public mutating func next() -> E? {
-        if let next = generator.next() {
+        if let next = iterator.next() {
             let result = next as! E
             return result
         }

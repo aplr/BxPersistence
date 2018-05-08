@@ -17,8 +17,10 @@ import Foundation
 public struct Writable<E: Entity> {
     
     public let entity: E
+    public let connection: DatabaseConnection
     
-    internal init(_ entity: E) {
+    public init(_ entity: E, connection: DatabaseConnection) {
         self.entity = entity
+        self.connection = connection
     }
 }

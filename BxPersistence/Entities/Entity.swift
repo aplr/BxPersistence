@@ -16,6 +16,7 @@ import Foundation
 
 public protocol Entity: class, CVarArg, NSObjectProtocol, PropertyType {
     
+    init()
 }
 
 extension Entity {
@@ -34,7 +35,7 @@ public protocol PrimaryKeyEntity: Entity {
 
 extension Property where Value: PrimaryKeyEntity {
     
-    var primaryKey: Property<Value.Key> {
+    public var primaryKey: Property<Value.Key> {
         return Property<Value.Key>(Value.primaryKey, relativeTo: self)
     }
 }

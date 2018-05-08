@@ -18,7 +18,7 @@ public struct Property<Value: PropertyType> {
     
     private let name: String?
     
-    internal var label: String {
+    public var label: String {
         return name ?? "SELF"
     }
     

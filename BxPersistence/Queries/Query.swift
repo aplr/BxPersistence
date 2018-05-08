@@ -103,7 +103,7 @@ public class Query<E: Entity> {
 extension Query: Sequence {
     
     public func makeIterator() -> QueryIterator<E> {
-        return .init(base.enumerator)
+        return .init(base.iterator)
     }
 }
 

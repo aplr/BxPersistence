@@ -29,35 +29,17 @@ public struct Context {
     public func commit() -> Single<[Entity]> {
         return Single.create { single in
             self.context {
-                var completed = [Transaction]()
-                var result = [Entity]()
+                var result = [Entity?]()
                 do {
                     try self.transactions.forEach {
-                        if let value = try $0.commit() {
-                            result += [value]
-                        }
-                        completed += [$0]
+                        result.append(try $0.commit())
                     }
-                    single(.success(result))
+                    single(.success(result.compactMap { $0 }))
                 } catch {
-                    completed.forEach {
-                        $0.rollback()
-                    }
                     single(.error(error))
                 }
             }
             return Disposables.create()
-        }.trigger()
-    }
-    
-    @discardableResult
-    public func rollback() -> Completable {
-        return Completable.complete { complete in
-            self.context {
-                self.transactions.forEach {
-                    $0.rollback()
-                }
-            }
         }.trigger()
     }
 }

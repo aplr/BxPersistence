@@ -22,7 +22,7 @@ public protocol QueryType {
     var first: Entity? { get }
     var last: Entity? { get }
     
-    var enumerator: NSFastEnumeration { get }
+    var iterator: AnyIterator<Entity> { get }
     var observedElements: Observable<QueryChange<Entity>> { get }
     
     func filter(with queryFilter: QueryFilter<Entity>) -> QueryType

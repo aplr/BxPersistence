@@ -30,8 +30,8 @@ public struct FakeQueryType: QueryType {
         return nil
     }
     
-    public var enumerator: NSFastEnumeration {
-        return NSArray()
+    public var iterator: AnyIterator<Entity> {
+        return AnyIterator { nil }
     }
     
     public var observedElements: Observable<QueryChange<Entity>> {

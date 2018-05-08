@@ -16,22 +16,15 @@ import Foundation
 import RxSwift
 import BxUtility
 
-public struct Transaction {
+public class Transaction {
     
     private let executeCommit: () throws -> Entity?
-    private let executeRollback: () -> Void
     
-    public init(commit: @escaping () throws -> Entity?,
-                rollback: @escaping () -> Void) {
+    public init(commit: @escaping () throws -> Entity?) {
         self.executeCommit = commit
-        self.executeRollback = rollback
     }
     
     func commit() throws -> Entity? {
         return try self.executeCommit()
-    }
-    
-    func rollback() {
-        self.executeRollback()
     }
 }
