@@ -15,7 +15,7 @@
 import Foundation
 import RxSwift
 
-public class FakeDatabaseConnection: DatabaseConnection {
+public struct FakeDatabaseConnection: DatabaseConnection {
     
     public var context: Context {
         return Context(transactions: [], context: { _ in return })
