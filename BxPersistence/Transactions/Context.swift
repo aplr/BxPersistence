@@ -26,25 +26,28 @@ public struct Context {
     }
     
     @discardableResult
-    public func commit() -> Completable {
-        return Completable.create { complete in
+    public func commit() -> Single<[Entity]> {
+        return Single.create { single in
             self.context {
                 var completed = [Transaction]()
+                var result = [Entity]()
                 do {
                     try self.transactions.forEach {
-                        try $0.commit()
+                        if let value = try $0.commit() {
+                            result += [value]
+                        }
                         completed += [$0]
                     }
-                    complete(.completed)
+                    single(.success(result))
                 } catch {
                     completed.forEach {
                         $0.rollback()
                     }
-                    complete(.error(error))
+                    single(.error(error))
                 }
             }
             return Disposables.create()
-            }.trigger()
+        }.trigger()
     }
     
     @discardableResult
@@ -55,6 +58,6 @@ public struct Context {
                     $0.rollback()
                 }
             }
-            }.trigger()
+        }.trigger()
     }
 }

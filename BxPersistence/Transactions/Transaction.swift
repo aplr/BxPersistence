@@ -18,17 +18,17 @@ import BxUtility
 
 public struct Transaction {
     
-    private let executeCommit: () throws -> Void
+    private let executeCommit: () throws -> Entity?
     private let executeRollback: () -> Void
     
-    public init(commit: @escaping () throws -> Void,
+    public init(commit: @escaping () throws -> Entity?,
                 rollback: @escaping () -> Void) {
         self.executeCommit = commit
         self.executeRollback = rollback
     }
     
-    func commit() throws {
-        try self.executeCommit()
+    func commit() throws -> Entity? {
+        return try self.executeCommit()
     }
     
     func rollback() {
