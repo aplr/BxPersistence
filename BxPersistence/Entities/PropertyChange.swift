@@ -14,27 +14,13 @@
 
 import Foundation
 
-public struct QueryCollection<E> {
+public struct PropertyChange {
     
-    private let collection: QueryCollectionType
+    internal let name: String
+    internal let newValue: Any?
     
-    internal init<O>(_ collection: QueryCollection<O>) {
-        self.collection = collection.collection
-    }
-    
-    public init(_ collection: QueryCollectionType) {
-        self.collection = collection
-    }
-    
-    public var numberOfSections: Int {
-        return collection.numberOfSections
-    }
-    
-    public func numberOfItems(in section: Int) -> Int {
-        return collection.numberOfItems(in: section)
-    }
-    
-    public func object(at indexPath: IndexPath) -> E {
-        return collection.object(at: indexPath) as! E
+    public init(name: String, newValue: Any?) {
+        self.name = name
+        self.newValue = newValue
     }
 }

@@ -50,24 +50,3 @@ public class GroupedQuery<E: Entity> {
         return IndexPath(row: index - base.index(of: entity)!, section: section)
     }
 }
-
-extension GroupedQuery: QueryCollectionType {
-    
-    var numberOfSections: Int {
-        return self.groupStarts.count
-    }
-    
-    func numberOfItems(in section: Int) -> Int {
-        if section + 1 >= self.groupStarts.count {
-            return self.base.count - self.base.index(of: self.groupStarts.last!)!
-        } else {
-            let entity = self.groupStarts[section]
-            let successor = self.groupStarts[section + 1]
-            return self.base.index(of: successor)! - self.base.index(of: entity)!
-        }
-    }
-    
-    func object(at indexPath: IndexPath) -> Any {
-        return self[indexPath]
-    }
-}

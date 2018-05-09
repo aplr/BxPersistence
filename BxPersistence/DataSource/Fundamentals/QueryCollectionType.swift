@@ -14,7 +14,7 @@
 
 import Foundation
 
-internal protocol QueryCollectionType {
+public protocol QueryCollectionType {
     
     var numberOfSections: Int { get }
     func numberOfItems(in section: Int) -> Int

@@ -106,18 +106,3 @@ extension Query: Sequence {
         return .init(base.iterator)
     }
 }
-
-extension Query: QueryCollectionType {
-    
-    var numberOfSections: Int {
-        return 1
-    }
-    
-    func numberOfItems(in section: Int) -> Int {
-        return count
-    }
-    
-    func object(at indexPath: IndexPath) -> Any {
-        return self[indexPath.row]
-    }
-}

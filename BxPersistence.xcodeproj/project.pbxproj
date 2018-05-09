@@ -33,6 +33,7 @@
 		C91CE8C5208F9DAD00296967 /* DatabaseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CE8C4208F9DAD00296967 /* DatabaseConnection.swift */; };
 		C91CE8CD208F9EFF00296967 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CE8CC208F9EFF00296967 /* Query.swift */; };
 		C91CE8CF208F9F0500296967 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CE8CE208F9F0500296967 /* Transaction.swift */; };
+		C933844320A2DFEC0028C7B9 /* PropertyChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933844220A2DFEC0028C7B9 /* PropertyChange.swift */; };
 		C9A29F0B2092886700CAE788 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A29F0A2092886700CAE788 /* Reactive+Extension.swift */; };
 		C9B65A89207B8DA600BE5B00 /* BxPersistence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B65A7F207B8DA600BE5B00 /* BxPersistence.framework */; };
 		C9B65A8E207B8DA600BE5B00 /* BxPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B65A8D207B8DA600BE5B00 /* BxPersistenceTests.swift */; };
@@ -83,6 +84,7 @@
 		C91CE8C4208F9DAD00296967 /* DatabaseConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConnection.swift; sourceTree = "<group>"; };
 		C91CE8CC208F9EFF00296967 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		C91CE8CE208F9F0500296967 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		C933844220A2DFEC0028C7B9 /* PropertyChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyChange.swift; sourceTree = "<group>"; };
 		C9A29F0A2092886700CAE788 /* Reactive+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		C9B65A7F207B8DA600BE5B00 /* BxPersistence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BxPersistence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B65A82207B8DA600BE5B00 /* BxPersistence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BxPersistence.h; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				C90401F3208FACD300D9935E /* Entity.swift */,
+				C933844220A2DFEC0028C7B9 /* PropertyChange.swift */,
 				C908740020908E30008128DA /* Discardable.swift */,
 				C90401F5208FF4B700D9935E /* Writable.swift */,
 			);
@@ -427,6 +430,7 @@
 				C905902620913108005F8892 /* QueryChange.swift in Sources */,
 				C908740D2090AF27008128DA /* QueryType.swift in Sources */,
 				C90401F4208FACD300D9935E /* Entity.swift in Sources */,
+				C933844320A2DFEC0028C7B9 /* PropertyChange.swift in Sources */,
 				C90873FA20908219008128DA /* Context.swift in Sources */,
 				C90873FC2090836B008128DA /* FakeDatabaseConnection.swift in Sources */,
 				C90874092090A656008128DA /* QueryFilter.swift in Sources */,

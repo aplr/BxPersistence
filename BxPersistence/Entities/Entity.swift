@@ -13,16 +13,42 @@
 // limitations under the License.
 
 import Foundation
+import RxSwift
+
+fileprivate var observerContext: UInt8 = 0
 
 public protocol Entity: class, CVarArg, NSObjectProtocol, PropertyType {
     
     init()
+    var observedProperties: Observable<[PropertyChange]> { get }
 }
 
 extension Entity {
     
     public static var properties: Property<Self> {
         return Property()
+    }
+}
+
+extension Entity where Self: NSObject {
+    
+    public func observable<T>(for property: (Property<Self>) -> Property<T>) -> Observable<T> {
+        var sequence: Observable<[PropertyChange]>
+        if let stored = objc_getAssociatedObject(self, &observerContext) as? Observable<[PropertyChange]> {
+            sequence = stored
+        } else {
+            sequence = observedProperties
+                .share()
+                .subscribeOn(MainScheduler.instance)
+                .observeOn(MainScheduler.instance)
+            objc_setAssociatedObject(self, &observerContext, sequence, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        let name = property(Self.properties).label
+        return sequence
+            .filter { changes in changes.contains { $0.name == name } }
+            .map { $0.first?.newValue as? T }
+            .filter { $0 != nil }.map { $0! }
+            .startWith(value(forKeyPath: name) as! T)
     }
 }
 

@@ -40,8 +40,8 @@ public struct QueryChangeDescription {
     public let deletions: [IndexPath]
     public let modifications: [IndexPath]
     
-    internal init(sectionInsertions: IndexSet, sectionDeletions: IndexSet,
-                  insertions: [IndexPath], deletions: [IndexPath], modifications: [IndexPath]) {
+    public init(sectionInsertions: IndexSet, sectionDeletions: IndexSet,
+                insertions: [IndexPath], deletions: [IndexPath], modifications: [IndexPath]) {
         self.sectionInsertions = sectionInsertions
         self.sectionDeletions = sectionDeletions
         self.insertions = insertions
