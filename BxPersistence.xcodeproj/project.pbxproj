@@ -34,6 +34,7 @@
 		C91CE8CD208F9EFF00296967 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CE8CC208F9EFF00296967 /* Query.swift */; };
 		C91CE8CF208F9F0500296967 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CE8CE208F9F0500296967 /* Transaction.swift */; };
 		C933844320A2DFEC0028C7B9 /* PropertyChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C933844220A2DFEC0028C7B9 /* PropertyChange.swift */; };
+		C947106B20A3214400266B0D /* BxUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C947106A20A3214400266B0D /* BxUtility.framework */; };
 		C9A29F0B2092886700CAE788 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A29F0A2092886700CAE788 /* Reactive+Extension.swift */; };
 		C9B65A89207B8DA600BE5B00 /* BxPersistence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B65A7F207B8DA600BE5B00 /* BxPersistence.framework */; };
 		C9B65A8E207B8DA600BE5B00 /* BxPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B65A8D207B8DA600BE5B00 /* BxPersistenceTests.swift */; };
@@ -85,6 +86,7 @@
 		C91CE8CC208F9EFF00296967 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		C91CE8CE208F9F0500296967 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C933844220A2DFEC0028C7B9 /* PropertyChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyChange.swift; sourceTree = "<group>"; };
+		C947106A20A3214400266B0D /* BxUtility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BxUtility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A29F0A2092886700CAE788 /* Reactive+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		C9B65A7F207B8DA600BE5B00 /* BxPersistence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BxPersistence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B65A82207B8DA600BE5B00 /* BxPersistence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BxPersistence.h; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C947106B20A3214400266B0D /* BxUtility.framework in Frameworks */,
 				3323B6E7EE13086B55F50A29 /* libPods-BxPersistence.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +266,7 @@
 		D41DF56D00FA5F299D4DF0F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C947106A20A3214400266B0D /* BxUtility.framework */,
 				9F5EEB6D831F523B9417429A /* libPods-BxPersistence.a */,
 				B5C82185F56E08F9296BC264 /* libPods-BxPersistenceTests.a */,
 			);

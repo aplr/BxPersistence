@@ -30,7 +30,7 @@ extension Database {
     }
     
     public func assertValidEntity(_ entity: Entity.Type) {
-        precondition(self.model.entities.contains { $0 == entity },
-                     "Database does not manage entity \(entity).")
+        assert(self.model.entities.contains { $0 == entity },
+               "Database does not manage entity \(entity).")
     }
 }

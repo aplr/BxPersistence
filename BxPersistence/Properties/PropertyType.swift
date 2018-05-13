@@ -116,3 +116,10 @@ extension Set: PropertyType where Element: Entity {
         return "%@"
     }
 }
+
+extension UUID: PropertyType {
+    
+    public static var argsIdentifier: String {
+        return "%@"
+    }
+}

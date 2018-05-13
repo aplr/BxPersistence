@@ -14,6 +14,7 @@
 
 import RxSwift
 import BxUtility
+import BxReact
 
 extension ObservableType where E: Collection, E.Index == Int, E.Element: Equatable {
     
@@ -23,7 +24,7 @@ extension ObservableType where E: Collection, E.Index == Int, E.Element: Equatab
                                             objectAtIndexPath: { collection[$0.row] }))
     }
     
-    public func elements() -> Observable<QueryChange<E.Element>> {
+    public func elements() -> Trustable<QueryChange<E.Element>> {
         return Observable<QueryChange<E.Element>>
             .create { observer in
                 return self.withUpdate()
@@ -47,7 +48,7 @@ extension ObservableType where E: Collection, E.Index == Int, E.Element: Equatab
                         observer.onNext(.change(self.queryCollection(for: new), description: description))
                     }, onError: observer.onError,
                        onCompleted: observer.onCompleted)
-        }
+            }.asTrustable()
     }
 }
 
@@ -59,7 +60,7 @@ extension ObservableType where E: Collection, E.Element: SectionType, E.Element.
                                             objectAtIndexPath: { collection[$0.section].elements[$0.row] }))
     }
     
-    public func elements() -> Observable<QueryChange<E.Element.Element>> {
+    public func elements() -> Trustable<QueryChange<E.Element.Element>> {
         return Observable<QueryChange<E.Element.Element>>
             .create { observer in
                 return self.withUpdate()
@@ -95,7 +96,7 @@ extension ObservableType where E: Collection, E.Element: SectionType, E.Element.
                         observer.onNext(.change(self.queryCollection(for: new), description: description))
                     }, onError: observer.onError,
                        onCompleted: observer.onCompleted)
-        }
+            }.asTrustable()
     }
 }
 

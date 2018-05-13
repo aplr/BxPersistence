@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = 'BxPersistence'
-    s.version = '1.1.1'
+    s.version = '1.1.2'
     s.swift_version    = '4.1'
     s.summary          = 'Universal Interface for Database Access.'
 
@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
 
     s.dependency 'RxSwift', '~> 4.0'
     s.dependency 'BxUtility', '~> 1.1'
+    s.dependency 'BxReact', '~> 0.1'
 
     s.framework = 'Foundation'
 
