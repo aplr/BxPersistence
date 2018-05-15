@@ -15,7 +15,6 @@
 import Foundation
 import RxSwift
 import BxUtility
-import BxReact
 
 fileprivate var observerContext: UInt8 = 0
 
@@ -34,7 +33,7 @@ extension Entity {
 
 extension Entity where Self: NSObject {
     
-    public func observable<T>(for property: (Property<Self>) -> Property<T>) -> Trustable<T> {
+    public func observable<T>(for property: (Property<Self>) -> Property<T>) -> Observable<T> {
         var sequence: Observable<[PropertyChange]>
         if let stored = objc_getAssociatedObject(self, &observerContext) as? Observable<[PropertyChange]> {
             sequence = stored
@@ -51,7 +50,6 @@ extension Entity where Self: NSObject {
             .map { $0.first?.newValue as? T }
             .filterNil()
             .startWith(value(forKeyPath: name) as! T)
-            .asTrustable()
     }
 }
 

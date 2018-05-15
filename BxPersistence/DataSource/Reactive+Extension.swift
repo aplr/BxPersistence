@@ -14,18 +14,17 @@
 
 import Foundation
 import RxSwift
-import BxReact
 
 extension Reactive where Base: Collection, Base.Index == Int, Base.Element: Equatable {
     
-    public func elements() -> Trustable<QueryChange<Base.Element>> {
+    public func elements() -> Observable<QueryChange<Base.Element>> {
         return Observable.just(base).elements()
     }
 }
 
 extension Reactive where Base: Collection, Base.Index == Int, Base.Element: SectionType, Base.Element.Element: Equatable {
     
-    public func elements() -> Trustable<QueryChange<Base.Element>> {
+    public func elements() -> Observable<QueryChange<Base.Element>> {
         return Observable.just(base).elements()
     }
 }

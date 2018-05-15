@@ -15,12 +15,11 @@
 import Foundation
 import BxUtility
 import RxSwift
-import BxReact
 
 public class Query<E> {
     
     private let base: QueryType
-    private var sequence: Trustable<QueryChange<E>>?
+    private var sequence: Observable<QueryChange<E>>?
     
     public init(_ base: QueryType) {
         self.base = base
@@ -54,14 +53,13 @@ public class Query<E> {
         return base[index] as! E
     }
     
-    public func elements() -> Trustable<QueryChange<E>> {
+    public func elements() -> Observable<QueryChange<E>> {
         if let sequence = self.sequence {
             return sequence
         } else {
             let sequence = base.observedElements
                 .map { QueryChange<E>($0) }
                 .share()
-                .asTrustable()
             self.sequence = sequence
             return sequence
         }
