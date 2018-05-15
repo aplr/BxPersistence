@@ -14,12 +14,7 @@
 
 import UIKit
 
-public protocol _QueryChange: Sequence {
-    
-    associatedtype Element
-}
-
-public enum QueryChange<Element>: _QueryChange {
+public enum QueryChange<Element> {
     
     case initial(QueryCollection<Element>)
     case change(QueryCollection<Element>, description: QueryChangeDescription)
@@ -36,34 +31,11 @@ public enum QueryChange<Element>: _QueryChange {
         }
     }
     
-    public func makeIterator() -> AnyIterator<Element> {
-        let coll: QueryCollection<Element>? = {
-            switch self {
-            case .initial(let c): return c
-            case .change(let c, description: _): return c
-            default: return nil
-            }
-        }()
-        
-        guard let collection = coll else {
-            return AnyIterator { return nil }
-        }
-        
-        var section = 0
-        var item = 0
-        return AnyIterator {
-            while section < collection.numberOfSections {
-                if item < collection.numberOfItems(in: section) {
-                    defer {
-                        item += 1
-                    }
-                    return collection.object(at: IndexPath(item: item, section: section))
-                } else {
-                    section += 1
-                    item = 0
-                }
-            }
-            return nil
+    public var collection: QueryCollection<Element>? {
+        switch self {
+        case .initial(let collection): return collection
+        case .change(let collection, description: _): return collection
+        default: return nil
         }
     }
 }

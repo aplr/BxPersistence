@@ -38,3 +38,25 @@ public struct QueryCollection<E> {
         return collection.object(at: indexPath) as! E
     }
 }
+
+extension QueryCollection: Sequence {
+    
+    public func makeIterator() -> AnyIterator<E> {
+        var section = 0
+        var item = 0
+        return AnyIterator {
+            while section < self.numberOfSections {
+                if item < self.numberOfItems(in: section) {
+                    defer {
+                        item += 1
+                    }
+                    return self.object(at: IndexPath(item: item, section: section))
+                } else {
+                    section += 1
+                    item = 0
+                }
+            }
+            return nil
+        }
+    }
+}

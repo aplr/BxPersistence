@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = 'BxPersistence'
-    s.version = '1.2.1'
+    s.version = '1.2.2'
     s.swift_version    = '4.1'
     s.summary          = 'Universal Interface for Database Access.'
 
