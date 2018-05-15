@@ -14,12 +14,15 @@
 
 import Foundation
 
-public struct QueryIterator<E: Entity>: IteratorProtocol {
+public struct QueryIterator<E>: IteratorProtocol {
     
-    private var iterator: AnyIterator<Entity>
+    private var iterator: AnyIterator<Any>
     
-    internal init(_ base: AnyIterator<Entity>) {
-        iterator = base
+    internal init<I: IteratorProtocol>(_ base: I) {
+        var base = base
+        iterator = AnyIterator {
+            base.next()
+        }
     }
     
     public mutating func next() -> E? {

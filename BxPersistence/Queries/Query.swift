@@ -17,7 +17,7 @@ import BxUtility
 import RxSwift
 import BxReact
 
-public class Query<E: Entity> {
+public class Query<E> {
     
     private let base: QueryType
     private var sequence: Trustable<QueryChange<E>>?
@@ -46,6 +46,30 @@ public class Query<E: Entity> {
         return nil
     }
     
+    public func fetch() -> [E] {
+        return base.fetch() as! [E]
+    }
+    
+    public subscript(index: Int) -> E {
+        return base[index] as! E
+    }
+    
+    public func elements() -> Trustable<QueryChange<E>> {
+        if let sequence = self.sequence {
+            return sequence
+        } else {
+            let sequence = base.observedElements
+                .map { QueryChange<E>($0) }
+                .share()
+                .asTrustable()
+            self.sequence = sequence
+            return sequence
+        }
+    }
+}
+
+extension Query where E: Entity {
+    
     public func filter(isIncluded predicate: (Property<E>) -> QueryFilter<E>) -> Query<E> {
         return Query(base.filter(with: QueryFilter(predicate(E.properties))))
     }
@@ -56,10 +80,6 @@ public class Query<E: Entity> {
     
     public func distinct<C: Comparable>(by property: (Property<E>) -> Property<C>) -> Query<E> {
         return Query(base.distinct(by: property(E.properties)))
-    }
-    
-    public func fetch() -> [E] {
-        return base.fetch() as! [E]
     }
     
     public func sum<A: Addable>(of property: (Property<E>) -> Property<A>) -> A {
@@ -80,23 +100,6 @@ public class Query<E: Entity> {
     
     public func index(of element: E) -> Int? {
         return base.index(of: element)
-    }
-    
-    public subscript(index: Int) -> E {
-        return base[index] as! E
-    }
-    
-    public func elements() -> Trustable<QueryChange<E>> {
-        if let sequence = self.sequence {
-            return sequence
-        } else {
-            let sequence = base.observedElements
-                .map { QueryChange<E>($0) }
-                .share()
-                .asTrustable()
-            self.sequence = sequence
-            return sequence
-        }
     }
 }
 
