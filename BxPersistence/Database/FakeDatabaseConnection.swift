@@ -21,25 +21,25 @@ public class FakeDatabaseConnection: DatabaseConnection {
         
     }
     
-    public var context: Context {
-        return Context(transactions: [], context: { _ in return })
-    }
-    
     public func read<E>(_ type: E.Type) -> Query<E> where E: Entity {
         return Query(FakeQueryType())
     }
     
-    public func create<E>(_ type: E.Type,
+    public func create<E>(_ type: E.Type, andReturn: Bool,
                           _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
         return self
     }
     
-    public func update<E>(_ entity: E,
+    public func update<E>(_ entity: E, andReturn: Bool,
                           _ execute: @escaping (Writable<E>) -> Void) -> DatabaseConnection where E: Entity {
         return self
     }
     
     public func delete<E>(_ entity: E) -> DatabaseConnection where E: Entity {
         return self
+    }
+    
+    public func commit() -> Single<[Entity]> {
+        return Single.just([])
     }
 }

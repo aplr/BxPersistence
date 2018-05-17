@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import RxSwift
-import BxUtility
+import BxReact
 
 extension ObservableType where E: Collection, E.Index == Int, E.Element: Equatable {
     
