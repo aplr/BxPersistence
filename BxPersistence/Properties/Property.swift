@@ -19,7 +19,7 @@ public struct Property<Value: PropertyType> {
     private let name: String?
     
     public var label: String {
-        return name ?? "SELF"
+        return name ?? "self"
     }
     
     public init<V>(_ name: String, relativeTo parent: Property<V>) {
